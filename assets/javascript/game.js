@@ -1,92 +1,155 @@
-// Theme: Types of Coffee
+// Crystal Collector Game
 
-var words = ["cappuccino", "latte", "espresso", "americano", "decaf", "affogato", "mocha", "black", "cortado" ];  
-var wins = 0;
+// score object
+var stats = {
+    score: 0,
+    randomNum: 0,
+    wins: 0,
+    losses: 0
+};
 
+// store crystal values
+var crystalValues = {
+    c1 : 0, 
+    c2 : 0,
+    c3 : 0, 
+    c4 : 0
+};
 
+function startGame() {  
+    // reset score     
+    stats.score = 0;
 
+    // generate new random number (between 19-120)
+    stats.randomNum = Math.floor(Math.random()*102 +19);
+    console.log(stats.randomNum);
 
-function startGame() {
-    var guesses = [];
-    var num_correct = 0;                // # of correct guesses for a word
-    var num_guesses = 0;
-    var guesses_remaining = 11;        // starts off as maximum # of guesses
-    var complete = false;             // complete will become true when full word is guessed
-    var correct_guesses = [];
-     //var correct_guesses = Array.apply(null, Array(word_len)).map(String.prototype.valueOf, "_");
- 
-
+    // reset display values
+    $("#Points").text(stats.score);
+    $("#RN").text(stats.randomNum); 
     
-    //randomly select an element from the words array
-    var random_word = words[Math.floor(Math.random() * words.length)];
-    console.log(random_word);
-    var word_len = random_word.length;           // number of letters in random word
-    
+    // generate random values for crystals
+    crystalValues.c1 = Math.floor(Math.random()*12 +1);
+    crystalValues.c2 = Math.floor(Math.random()*12 +1);
+    crystalValues.c3 = Math.floor(Math.random()*12 +1);
+    crystalValues.c4 = Math.floor(Math.random()*12 +1);
 
-    for (var i=0; i < word_len; i++) {
-        correct_guesses.push("_");
-    }    
-    
-    document.getElementById("Word").innerHTML = correct_guesses.join (" ");
-    
-    document.getElementById("remaining").innerHTML = guesses_remaining;
-
-    document.getElementById("alreadyGuessed").innerHTML = guesses.join(" ");
-    
-
-    // event listener for button pressed
-    document.onkeyup = function(event) {
-        var input = String.fromCharCode(event.which);
-        letter = input.toLowerCase();
-
-        // if the word has not been fully guessed
-        if (guesses_remaining > 0 && complete == false) {
-            if (guesses.includes(letter)) {      // prevent user from wasting a guess on a letter already guessed
-                alert("letter already guessed; choose another one");
-            }
-
-            else {
-                guesses.push(letter);
-                document.getElementById("alreadyGuessed").innerHTML = guesses.join(" "); // update list of letters already guessed
-
-                num_guesses++;
-                guesses_remaining--;
-                document.getElementById("remaining").innerHTML = guesses_remaining;  // update guesses remaining on web page
-
-                if (random_word.includes(letter)) { 
-                    for (var i = 0; i < word_len; i++) {
-                        if (random_word[i] == letter) {
-                            correct_guesses[i] = letter;
-                            document.getElementById("Word").innerHTML = correct_guesses.join(" "); //update word displayed
-                        }
-                    }
-                    if (correct_guesses.includes("_") == false) {
-                        complete = true;
-                    }
-            
-                    num_correct++;
-                }
-            }            
-        }
-        if (complete == true) {
-            alert("Congratulations! You guessed the word");
-            wins++;
-            document.getElementById("Wins").innerHTML = wins;       // update wins on web page
-
-            // reset variables and restart Game 
-            complete = false;   // reset completion boolean before restarting game
-            startGame();        // restart Game     
-        }
-        
-        if (guesses_remaining == 0 && complete == false) {
-            alert("Sorry, you lost! Try again"); 
-            startGame();       // restart Game
-        }
-    }
+    console.log("Crystal 1: " + crystalValues.c1);
+    console.log("Crystal 2: " + crystalValues.c2);
+    console.log("Crystal 3: " + crystalValues.c3);
+    console.log("Crystal 4: " + crystalValues.c4);
 }
 
+// run program
+startGame();        // initial start to game when you refresh the page
 
+// create crystal button listeners and update total score
+document.getElementById("crystal1").addEventListener("click", function(){
+    stats.score += crystalValues.c1;
+    $("#Points").text(stats.score);
+    console.log("score: " + stats.score);
 
-// Call main function
-startGame();
+    if (stats.score > stats.randomNum) {
+        stats.losses++;
+        $("#Losses").text(stats.losses);
+        alert("Sorry you lost! Play again.");
 
+        // reset score and restart game
+        $("#Points").text(0);
+        stats.score = 0;
+        startGame();
+    }
+
+    else if (stats.score == stats.randomNum) {
+        stats.wins++;
+        $("#Wins").text(stats.wins);
+        alert("Congratulations, you won! Play again");
+
+        // reset score and restart game
+        stats.score = 0;
+        startGame();
+    }
+});
+
+document.getElementById("crystal2").addEventListener("click", function(){
+    stats.score += crystalValues.c2;
+    $("#Points").text(stats.score);
+    console.log("score: " + stats.score);
+
+    if (stats.score > stats.randomNum) {
+        stats.losses++;
+        $("#Losses").text(stats.losses);
+        alert("Sorry you lost! Play again.");
+
+        // reset score and restart game
+        $("#Points").text(0);
+        stats.score = 0;
+        startGame();
+    }
+
+    else if (stats.score == stats.randomNum) {
+        stats.wins++;
+        $("#Wins").text(stats.wins);
+        alert("Congratulations, you won! Play again");
+
+        // reset score and restart game
+        stats.score = 0;
+        startGame();
+    }
+});
+
+document.getElementById("crystal3").addEventListener("click", function(){
+    var v3 = crystalValues.c3;
+    stats.score += v3;
+    $("#Points").text(stats.score);
+    console.log("score: " + stats.score);
+
+    if (stats.score > stats.randomNum) {
+        stats.losses++;
+        $("#Losses").text(stats.losses);
+        alert("Sorry you lost! Play again.");
+
+        // reset score and restart game
+        $("#Points").text(0);
+        stats.score = 0;
+        startGame();
+    }
+
+    else if (stats.score == stats.randomNum) {
+        stats.wins++;
+        $("#Wins").text(stats.wins);
+        alert("Congratulations, you won! Play again");
+
+        // reset score and restart game
+        stats.score = 0;
+        startGame();
+    }
+});
+
+document.getElementById("crystal4").addEventListener("click", function(){
+    var v4 = crystalValues.c4;
+    stats.score += v4;
+    $("#Points").text(stats.score);
+    console.log("score: " + stats.score);
+
+    if (stats.score > stats.randomNum) {
+        stats.losses++;
+        $("#Losses").text(stats.losses);
+        alert("Sorry you lost! Play again.");
+
+        // reset score and restart game
+        $("#Points").text(0);
+        stats.score = 0;
+        startGame();
+    }
+
+    else if (stats.score == stats.randomNum) {
+        stats.wins++;
+        $("#Wins").text(stats.wins);
+        alert("Congratulations, you won! Play again");
+
+        // reset score and restart game
+        stats.score = 0;
+        startGame();
+    }
+});

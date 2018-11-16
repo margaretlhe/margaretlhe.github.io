@@ -4,26 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Word Guess Game</title>
-
+    <title>Crystal Collector Game</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel = "stylesheet" src = "assets/reset.css">
-
+    <link rel = "stylesheet" href="assets/css/reset.css">
+    <link rel = "stylesheet" href="assets/css/style.css">
 </head>
-    <body>
-        <h1>Guess a type of coffee</h1>
-        <h4>Press any key to get started!</h4>
-        <div class="text-center">
-            <h3> </h3> <span id="Word"></span>
+<body>
+        
+        <div id ="prompt">
+            <h1>CHOOSE A CRYSTAL</h1>
+        </div> 
+    
+        <div class = text-center>
+            <button id="crystal1"><img src="assets/images/crystal1.jpg" style="height:100px;widows: 1px;00px;"></button>
+            <button id="crystal2"><img src="assets/images/crystal7.jpg" style="height:100px;widows: 1px;00px;"></button>
+            <button id="crystal3"><img src="assets/images/crystal6.jpg" style="height:100px;widows: 1px;00px;"></button>
+            <button id="crystal4"><img src="assets/images/crystal8.jpg" style="height:100px;widows: 1px;00px;"></button>
         </div>
 
-        <div class = "card-body">
-            <h3> Wins: </h3> <span id="Wins">0</span>
-            <h3>Number of Guesses remaining: </h3> <span id="remaining">0</span>
-            <h3>Letters Already Guessed: </h3> <span id="alreadyGuessed"></span>
+        <div class = "updates">
+            <h3>Random Number: </h3> <span id="RN">0</span>
+            <h3>Wins: </h3> <span id="Wins">0</span>
+            <h3>Losses: </h3> <span id="Losses">0</span>
+            <h2>Total Points: </h2> <span id="Points">0</span>
+            
         </div>
-    </body>
-
-    <script type="text/javascript" src="assets/javascript/game.js"></script>
-
+    
+    
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="assets/javascript/game.js"></script>
 </html>
